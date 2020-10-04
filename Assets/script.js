@@ -64,7 +64,7 @@ for (i = 0; i < scheduleKeeper.length; i++) {
     console.log(block)
     let newRow = $("<row>").addClass("row form-inline col-md-10 mx-auto no-gutters px-0")
     //Add label with block.label
-    let newLabel = $("<div>").addClass("col-1 h-100 time-block hour")
+    let newLabel = $("<div>").addClass("col-1 h-100 time-block")
     newLabel.text(block.label)
     //Add text field, populate any saved text
     let newArea = $("<textarea>").addClass("col-10 h-100")
@@ -77,16 +77,32 @@ for (i = 0; i < scheduleKeeper.length; i++) {
     } else {
         newArea.addClass("past")
     }
+    //give index data element to textarea
+    newArea.attr("data-index", i)
     //Add save button
     let newButton = $("<button>").addClass("btn col-1 h-100 saveBtn")
     newButton.html('<i class="far fa-save"></i>')
+    //give index data element to button
+    newButton.attr("data-index", i)
+    //Attach elements to row
     newRow.append(newLabel)
     newRow.append(newArea)
     newRow.append(newButton)
+    //Append row to page
     $("#planner").append(newRow)
 };
-
-//Append row to page
-
 //On save, update object of relevant time block and localStorage
-// };
+
+//click listener for save buttons
+$(document).on("click", ".saveBtn", saveText);
+
+function saveText() {
+    //get data-index from button clicked
+    let index = $(this).attr("data-index")
+    //get text from matching textarea
+    let newText = $("textarea[data-index=" + index + "]").val()
+    //update schedule array
+    scheduleKeeper[index].text = newText
+    //save updated array in localStorage
+    localStorage.setItem("scheduleStorage", JSON.stringify(scheduleKeeper))
+}
