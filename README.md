@@ -13,7 +13,7 @@ Fifth homework assignment for uw-sea-fsf-pt-08-2020-u-c, [a simple day planner t
 ## Description 
 For this assignment, we were asked to create a simple planner that would store tasks for each hour in localStorage. The tasks persist each day, so a user can track recurring daily items or leave themselves a reminder for the next day.
 
-![Project Screenshot](Assets/planner.gif)
+![Project Screenshot](Assets/Planner.gif)
 
 ### Building the Planner
 The only page elements kept in the page's HTML are the header and a section for the planner to populate - everything else is dynamically added using jQuery. To effectively save data for each hour block, I used an array containing an object for each block. The program checks if a user already has a saved array in their localStorage, and if they do it loads that data. Otherwise, it provides a default array with time blocks from 9am to 5pm and three example tasks.
